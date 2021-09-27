@@ -12,16 +12,19 @@ module.exports = {
   },
   devtool: 'source-map',
   resolve: {
-    extension: ['.ts', 'tsx', 'js', 'jsx', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
   devServer: {
-    contentBase: './dist',
-    port: 8000
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    port: 8000,
   },
   module: {
     rules: [
       {
-        test: /\.(t|j)sx?$/,
+        test: /\.(ts|js)x?$/,
         exclude: '/node_modules',
         loader: 'babel-loader',
       }

@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "npx webpack serve --config webpack.config.js --mode development"
+  },
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
