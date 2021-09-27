@@ -1,0 +1,44 @@
+#root {
+  margin: 2rem auto;
+  max-width: 800px;
+  font-family: sans-serif;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.task-list__item {
+  list-style: none;
+  border-bottom: 1px solid teal;
+  padding: 1rem 1rem 0.25rem;
+  color: teal;
+}
+
+.form {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.form__label {
+  color: teal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form__input {
+  color: teal;
+  padding: 0.5rem;
+  width: 200px;
+}
+
+.form__button {
+  height: 2.2rem;
+  cursor: pointer;
+}

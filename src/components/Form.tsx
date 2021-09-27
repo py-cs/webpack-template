@@ -13,11 +13,12 @@ const Form = ({ addTask }: FormProps) => {
     setTask('');
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="task">
-        <input name="task" type="text" value={task} onChange={(e) => setTask(e.target.value)} placeholder="Enter new task" />
+    <form className="form" onSubmit={handleSubmit}>
+      <label className="form__label" htmlFor="task">
+        New task
+        <input className="form__input" name="task" type="text" value={task} onChange={(e) => setTask(e.target.value)} placeholder="Enter description" />
       </label>
-      <button type="submit">Add tast</button>
+      <button disabled={!task} className="form__button" type="submit">Add task</button>
     </form>
   );
 };

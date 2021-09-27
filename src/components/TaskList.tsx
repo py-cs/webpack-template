@@ -5,8 +5,8 @@ interface TaskListProps {
 }
 
 const TaskList = ({ tasks }: TaskListProps) => (
-  <ul>
-    {tasks.map((task) => <li key={task}>{task}</li>)}
+  <ul className="task-list">
+    {tasks.map((task) => <li className="task-list__item" key={task}>{task}</li>)}
   </ul>
 );
 
