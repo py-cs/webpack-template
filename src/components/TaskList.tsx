@@ -1,9 +1,13 @@
-import React from "react";
+import React from 'react';
 
-export const TaskList = ({tasks}) => {
-  return (
-    <ul>
-      {tasks.map(task => <li key={task}>{task}</li>)}
-    </ul>
-  )
+interface TaskListProps {
+  tasks: string[];
 }
+
+const TaskList = ({ tasks }: TaskListProps) => (
+  <ul>
+    {tasks.map((task) => <li key={task}>{task}</li>)}
+  </ul>
+);
+
+export default TaskList;
