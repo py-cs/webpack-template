@@ -2,7 +2,9 @@
   "scripts": {
     "dev:server": "ts-node server.ts",
     "dev:client": "webpack serve --mode development",
-    "dev": "start npm run dev:client & start npm run dev:server"
+    "dev": "start npm run dev:client & start npm run dev:server",
+    "build:types": "tsc --noEmit",
+    "build": "npm run build:types && webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
