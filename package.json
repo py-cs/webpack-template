@@ -1,10 +1,13 @@
 {
   "scripts": {
-    "dev:server": "ts-node server.ts",
+    "dev:server": "ts-node src/server/server.ts",
     "dev:client": "webpack serve --mode development",
     "dev": "start npm run dev:client & start npm run dev:server",
     "build:types": "tsc --noEmit",
-    "build": "npm run build:types && webpack --mode production"
+    "build": "npm run build:client & npm run build:server",
+    "build:client": "webpack --config config/webpack.client.js",
+    "build:server": "webpack --config config/webpack.server.js",
+    "start:server": "nodemon dist/server/main.js"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -32,6 +35,7 @@
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.3.0",
     "nodemon": "^2.0.13",
+    "null-loader": "^4.0.1",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3",
     "webpack": "^5.54.0",

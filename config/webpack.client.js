@@ -3,30 +3,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+  mode: "development",
   entry: {
-    app: ['./src/index.tsx'],
+    app: ['./src/client/index.tsx'],
     vendor: ['react', 'react-dom'],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '..', 'dist'),
     filename: 'js/[name].bundle.js',
   },
   devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'public'),
-    },
-    compress: true,
-    port: 8000,
-  },
   module: {
     rules: [
       {
         test: /\.(ts|js)x?$/,
-        exclude: '/node_modules',
+        exclude: /node_modules/,
         loader: 'babel-loader',
       },
       {
@@ -37,7 +31,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/client/index.html',
     }),
     new MiniCssExtractPlugin()
   ],

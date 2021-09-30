@@ -1,11 +1,10 @@
-import { apiGetTasks, apiAddTask } from './api';
+import { apiGetTasks, apiAddTask } from '../client/api';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import Form from './components/Form';
 import TaskList from './components/TaskList';
-import './styles/index.css';
+import '../client/styles/index.css';
 
-const App = () => {
+export const App = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -23,5 +22,3 @@ const App = () => {
     </>
   );
 };
-
-ReactDOM.render(<App />, document.getElementById('root'));
