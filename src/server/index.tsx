@@ -1,9 +1,10 @@
 import express from "express";
 import cors from "cors";
 import fs from "fs";
-import path from "path";
 import { renderToString } from "react-dom/server";
-import { renderApp } from "../common/renderApp";
+import React from "react";
+import { App } from "../common/App";
+import path from "path";
 
 const app = express();
 const PORT = 5000;
@@ -24,19 +25,20 @@ app.post("/api", (req: express.Request, res: express.Response) => {
   return res.sendStatus(201);
 });
 
-app.get("/", (req: express.Request, res: express.Response) => {
+app.use("*", (req: express.Request, res: express.Response) => {
   let indexHTML = fs.readFileSync(
-    "index.html",
+    path.resolve("./dist/index.html"),
     {
       encoding: "utf8",
     }
   );
   indexHTML = indexHTML.replace(
     '<div id="root"></div>',
-    `<div id="root">${renderToString(renderApp())}</div>`
+    `<div id="root">${renderToString(<App />)}</div>`
   );
   res.contentType("text/html");
   res.status(200);
+  console.log(indexHTML);
   return res.send(indexHTML);
 });
 
