@@ -1,8 +1,8 @@
-import { apiGetTasks, apiAddTask } from '../client/api';
+import { apiGetTasks, apiAddTask } from './api';
 import React, { useEffect, useState } from 'react';
 import Form from './components/Form';
 import TaskList from './components/TaskList';
-import '../client/styles/index.css';
+import './styles/index.css';
 
 export const App = () => {
   const [tasks, setTasks] = useState([]);
