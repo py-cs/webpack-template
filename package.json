@@ -2,10 +2,7 @@
   "scripts": {
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "dev:server": "ts-node src/server/server.ts",
-    "dev:client": "webpack serve --mode development",
-    "dev": "start npm run dev:client & start npm run dev:server",
-    "build:types": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "build": "npm run build:client & npm run build:server",
     "build:client": "webpack --config config/webpack.client",
     "build:server": "webpack --config config/webpack.server",
@@ -57,6 +54,10 @@
     }
   },
   "lint-staged": {
-    "*": ["npm run lint:fix", "git add"]
+    "*.ts?(x)" : [
+      "npm run typecheck",
+      "npm run lint:fix",
+      "git add"
+    ]
   }
 }
