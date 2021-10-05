@@ -38,7 +38,6 @@ app.use("*", (req: express.Request, res: express.Response) => {
   );
   res.contentType("text/html");
   res.status(200);
-  console.log(indexHTML);
   return res.send(indexHTML);
 });
 

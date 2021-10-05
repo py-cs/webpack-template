@@ -1,5 +1,5 @@
 import { apiGetTasks, apiAddTask } from './api';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Form from './components/Form';
 import TaskList from './components/TaskList';
 import './styles/index.css';
@@ -11,9 +11,12 @@ export const App = () => {
     apiGetTasks().then(data => setTasks(data));
   }, [])
 
-  const createTask = (newTask: string) => {
-    apiAddTask(newTask).then(() => setTasks([...tasks, newTask]))
-  }
+  const createTask = useCallback(
+    (newTask: string) => {
+      apiAddTask(newTask).then(() => setTasks([...tasks, newTask]))
+    },
+    [tasks],
+  )
 
   return (
     <>
