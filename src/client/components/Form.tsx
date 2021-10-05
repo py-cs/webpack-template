@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 interface FormProps {
-  addTask(task: string): void;
+  addTask: (task: string) => void;
 }
 
-const Form = ({ addTask }: FormProps) => {
+const Form = ({ addTask }: FormProps): JSX.Element => {
   const [task, setTask] = useState('');
 
   const handleSubmit = (e) => {

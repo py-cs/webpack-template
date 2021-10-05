@@ -1,12 +1,11 @@
-const path = require('path');
-const webpack = require('webpack');
+import path from 'path';
 
-const createConfig = ({target, mode}) => {
+const createConfig = ({ target, mode }) => {
   const root = path.join(__dirname, '../');
   const src = path.join(root, 'src');
   const name = '[name].js';
   const dist = path.join(root, 'dist', target);
-    
+
   return {
     name: target,
     entry: path.join(src, target),
@@ -15,15 +14,15 @@ const createConfig = ({target, mode}) => {
 
     output: {
       path: dist,
-      filename: name
+      filename: name,
     },
-    
+
     resolve: {
       modules: [
         'node_modules',
-        'src'
+        'src',
       ],
-      extensions: ['.tsx', '.ts', '.js']
+      extensions: ['.tsx', '.ts', '.js'],
     },
 
     module: {
@@ -32,12 +31,12 @@ const createConfig = ({target, mode}) => {
           test: /\.tsx?$/,
           exclude: /node_modules/,
           use: 'babel-loader',
-        }
-      ]
+        },
+      ],
     },
-  }
-}
+  };
+};
 
 module.exports = {
-  createConfig
-}
+  createConfig,
+};
