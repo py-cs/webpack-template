@@ -5,9 +5,9 @@
     "dev": "start npm run dev:client & start npm run dev:server",
     "build:types": "tsc --noEmit",
     "build": "npm run build:client & npm run build:server",
-    "build:client": "webpack",
-    "build:server": "webpack --env server",
-    "start": "nodemon dist/server/server.js"
+    "build:client": "webpack --config config/webpack.client",
+    "build:server": "webpack --config config/webpack.server",
+    "start": "nodemon dist/server/main.js"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
