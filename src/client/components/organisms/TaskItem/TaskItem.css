@@ -1,0 +1,15 @@
+.task {
+  list-style: none;
+  border-bottom: 1px solid teal;
+  padding: 1rem 1rem 0.25rem;
+  color: teal;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}

@@ -1,4 +1,5 @@
-import createConfig from './webpack.common';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { createConfig } = require('./webpack.common');
 
 module.exports = (env) => {
   const config = createConfig({ target: 'server', mode: env.production ? 'production' : 'development' });

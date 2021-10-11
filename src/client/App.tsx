@@ -1,29 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { apiGetTasks, apiAddTask } from './api';
-import Form from './components/Form';
-import TaskList from './components/TaskList';
-import './styles/index.css';
+import React from 'react';
+import Main from './pages/Main';
 
-const App = (): JSX.Element => {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    apiGetTasks().then((data) => setTasks(data));
-  }, []);
-
-  const createTask = useCallback(
-    (newTask: string) => {
-      apiAddTask(newTask).then(() => setTasks([...tasks, newTask]));
-    },
-    [tasks],
-  );
-
+export default function App():JSX.Element {
   return (
-    <>
-      <Form addTask={createTask} />
-      <TaskList tasks={tasks} />
-    </>
+    <Main />
   );
-};
-
-export default App;
+}

@@ -9,7 +9,11 @@ import App from '../client/App';
 const app = express();
 const PORT = 5000;
 
-const tasks = ['test 1', 'test 2', 'test 3'];
+let tasks = [
+  { id: '1', description: 'test 1' },
+  { id: '2', description: 'test 2' },
+  { id: '3', description: 'test 3' },
+];
 
 app.use(cors());
 app.use(express.json());
@@ -21,8 +25,23 @@ app.get('/api', (req: express.Request, res: express.Response) => {
 
 app.post('/api', (req: express.Request, res: express.Response) => {
   const { task } = req.body;
-  tasks.push(task);
-  return res.sendStatus(201);
+  const id = +tasks[tasks.length - 1].id + 1;
+  const newTask = { id: id.toString(), description: task };
+  tasks.push(newTask);
+  return res.send(JSON.stringify(newTask));
+});
+
+app.put('/api', (req: express.Request, res: express.Response) => {
+  const { id, description } = req.body.task;
+  const taskToUpdate = tasks.find((task) => task.id === id);
+  taskToUpdate.description = description;
+  return res.sendStatus(200);
+});
+
+app.delete('/api', (req: express.Request, res: express.Response) => {
+  const { id } = req.query;
+  tasks = tasks.filter((task) => task.id !== id);
+  return res.sendStatus(204);
 });
 
 app.use('*', (req: express.Request, res: express.Response) => {

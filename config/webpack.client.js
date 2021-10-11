@@ -1,6 +1,7 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import createConfig from './webpack.common';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { createConfig } = require('./webpack.common');
 
 module.exports = (env) => {
   const config = createConfig({ target: 'client', mode: env?.production ? 'production' : 'development' });
