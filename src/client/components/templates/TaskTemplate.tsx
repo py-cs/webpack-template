@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   apiAddTask, apiDeleteTask, apiGetTasks, apiUpdateTask, Task,
-} from '../api';
-import TaskTemplate from '../components/templates/TaskTemplate';
+} from '../../api';
+import Form from '../organisms/Form/Form';
+import TaskList from '../organisms/TaskList/TaskList';
+import './TaskTemplate.css';
 
-const Main = (): JSX.Element => {
+const TaskTemplate = (): JSX.Element => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -34,8 +36,11 @@ const Main = (): JSX.Element => {
   );
 
   return (
-    <TaskTemplate />
+    <div className="template">
+      <Form addTask={createTask} />
+      <TaskList tasks={tasks} updateTask={updateTask} deleteTask={deleteTask} />
+    </div>
   );
 };
 
-export default Main;
+export default TaskTemplate;
