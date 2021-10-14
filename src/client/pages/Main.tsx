@@ -1,11 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useState,
+} from 'react';
 import {
   apiAddTask, apiDeleteTask, apiGetTasks, apiUpdateTask, Task,
 } from '../api';
+import Switch from '../components/atoms/Switch/Switch';
+import AltTemplate from '../components/templates/AltTemplate/AltTemplate';
 import TaskTemplate from '../components/templates/TaskTemplate';
+import MainPageContext from './MainPageContext';
 
 const Main = (): JSX.Element => {
   const [tasks, setTasks] = useState([]);
+  const [altTemplate, setAltTemplate] = useState(false);
 
   useEffect(() => {
     apiGetTasks().then((data) => setTasks(data));
@@ -34,7 +40,15 @@ const Main = (): JSX.Element => {
   );
 
   return (
-    <TaskTemplate />
+    <>
+      <Switch checked={altTemplate} toggle={() => setAltTemplate(!altTemplate)} />
+      <MainPageContext.Provider value={{
+        tasks, createTask, updateTask, deleteTask,
+      }}
+      >
+        {altTemplate ? <AltTemplate /> : <TaskTemplate />}
+      </MainPageContext.Provider>
+    </>
   );
 };
 

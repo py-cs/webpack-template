@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Button from '../../atoms/Button/Button';
 import TextInput from '../../molecules/TextInput/TextInput';
 import './Form.css';
@@ -10,11 +10,11 @@ interface FormProps {
 export default function Form({ addTask }: FormProps): JSX.Element {
   const [task, setTask] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     addTask(task);
     setTask('');
-  };
+  }, [task]);
 
   return (
     <form className="form">
