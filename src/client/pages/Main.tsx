@@ -2,7 +2,13 @@ import React, {
   useCallback, useEffect, useState,
 } from 'react';
 import {
-  apiAddTask, apiDeleteTask, apiGetTasks, apiUpdateTask, Task,
+  apiAddTask,
+  apiDeleteTask,
+  apiGetAltTemplate,
+  apiGetTasks,
+  apiUpdateAltTemplate,
+  apiUpdateTask,
+  Task,
 } from '../api';
 import Switch from '../components/atoms/Switch/Switch';
 import AltTemplate from '../components/templates/AltTemplate/AltTemplate';
@@ -15,6 +21,7 @@ const Main = (): JSX.Element => {
 
   useEffect(() => {
     apiGetTasks().then((data) => setTasks(data));
+    apiGetAltTemplate().then((data) => setAltTemplate(data));
   }, []);
 
   const createTask = useCallback(
@@ -39,9 +46,17 @@ const Main = (): JSX.Element => {
     [tasks],
   );
 
+  const toggleTemplate = useCallback(
+    () => {
+      apiUpdateAltTemplate(!altTemplate);
+      setAltTemplate(!altTemplate);
+    },
+    [altTemplate],
+  );
+
   return (
     <>
-      <Switch checked={altTemplate} toggle={() => setAltTemplate(!altTemplate)} />
+      <Switch checked={altTemplate} toggle={toggleTemplate} />
       <MainPageContext.Provider value={{
         tasks, createTask, updateTask, deleteTask,
       }}
