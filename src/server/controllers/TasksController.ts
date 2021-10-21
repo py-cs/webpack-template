@@ -17,9 +17,7 @@ export interface HistoryLogger {
 
 class TasksController {
   // eslint-disable-next-line no-useless-constructor
-  constructor(private logger: HistoryLogger) {
-    console.log(this.logger);
-  }
+  constructor(private logger: HistoryLogger) {}
 
   async getTasks(_req: Request, res: Response): Promise<void> {
     let status;
@@ -35,19 +33,22 @@ class TasksController {
       res.status(500).send(message);
     }
     const time = new Date();
-
     this.logger.logAction({ time, status, message });
   }
 
   async createTask(req: Request, res: Response): Promise<void> {
     let status;
     let message;
+    let created;
     try {
       const newTask = req.body as Task;
       const result = await collections.tasks.insertOne(newTask);
       if (result) {
         status = 201;
         message = `Successfully created a new task with id ${result.insertedId}`;
+        created = await collections.tasks.findOne({
+          _id: result.insertedId,
+        });
       } else {
         status = 500;
         message = 'Failed to create a new task.';
@@ -56,7 +57,7 @@ class TasksController {
       status = 400;
       message = error.message;
     }
-    res.status(status).send(message);
+    res.status(status).send(created || message);
     const time = new Date();
     this.logger.logAction({ time, status, message });
   }
@@ -64,19 +65,20 @@ class TasksController {
   async updateTask(req: Request, res: Response): Promise<void> {
     let status;
     let message;
-    const id = req?.params?.id;
     try {
-      const updatedTask: Task = req.body as Task;
-      const query = { _id: new ObjectId(id) };
-      const result = await collections.tasks.updateOne(query, {
-        $set: updatedTask,
-      });
-      if (result) {
+      const { _id, description } = req.body;
+      const result = await collections.tasks.updateOne(
+        { _id: new ObjectId(_id) },
+        {
+          $set: { description },
+        },
+      );
+      if (result.modifiedCount) {
         status = 200;
-        message = `Successfully updated task with id ${id}`;
+        message = `Successfully updated task with id ${_id}`;
       } else {
         status = 304;
-        message = `Task with id: ${id} not updated`;
+        message = `Task with id: ${_id} not updated`;
       }
     } catch (error) {
       status = 400;

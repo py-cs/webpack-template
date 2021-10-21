@@ -30,7 +30,7 @@ export default function TaskItem({ task, updateTask, deleteTask }: TaskItemProps
         : <div>{description}</div>}
       <div className="buttons">
         <Button caption={editMode ? 'Save' : 'Edit'} onClick={update} />
-        <Button caption="Delete" onClick={() => deleteTask(task.id)} />
+        <Button caption="Delete" onClick={() => deleteTask(task._id)} />
       </div>
     </li>
   );

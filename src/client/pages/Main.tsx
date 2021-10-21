@@ -35,13 +35,13 @@ const Main = (): JSX.Element => {
     (updatedTask: Task) => {
       apiUpdateTask(updatedTask)
         .then(() => setTasks(tasks
-          .map((task) => (task.id === updatedTask.id ? updatedTask : task))));
+          .map((task) => (task.id === updatedTask._id ? updatedTask : task))));
     }, [tasks],
   );
 
   const deleteTask = useCallback(
     (id: string) => {
-      apiDeleteTask(id).then(() => setTasks(tasks.filter((task) => task.id !== id)));
+      apiDeleteTask(id).then(() => setTasks(tasks.filter((task) => task._id !== id)));
     },
     [tasks],
   );

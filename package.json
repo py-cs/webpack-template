@@ -4,8 +4,8 @@
     "lint:fix": "eslint ./src --fix",
     "typecheck": "tsc --noEmit",
     "build": "npm run build:client & npm run build:server",
-    "build:client": "webpack --config config/webpack.client",
-    "build:server": "webpack --config config/webpack.server",
+    "build:client": "webpack --config config/webpack.client.js",
+    "build:server": "webpack --config config/webpack.server.js",
     "start": "nodemon dist/server/main.js",
     "prepare": "husky install",
     "dev": "ts-node ./src/server/index.tsx"
@@ -52,7 +52,8 @@
     "pg": "^8.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "webpack-node-externals": "^3.0.0"
   },
   "husky": {
     "hooks": {

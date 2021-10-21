@@ -13,7 +13,7 @@ const TaskList = ({ tasks, updateTask, deleteTask }: TaskListProps): JSX.Element
   <ul className="task-list">
     {tasks.map((task) => (
       <TaskItem
-        key={task.id}
+        key={task._id}
         task={task}
         updateTask={updateTask}
         deleteTask={deleteTask}

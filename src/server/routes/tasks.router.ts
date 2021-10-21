@@ -6,5 +6,5 @@ export const tasksRouter = express.Router();
 
 tasksRouter.get('/', tasksController.getTasks.bind(tasksController));
 tasksRouter.post('/', tasksController.createTask.bind(tasksController));
-tasksRouter.put('/:id', tasksController.updateTask.bind(tasksController));
+tasksRouter.put('/', tasksController.updateTask.bind(tasksController));
 tasksRouter.delete('/:id', tasksController.deleteTask.bind(tasksController));
