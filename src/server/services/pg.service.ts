@@ -21,8 +21,7 @@ INSERT INTO settings VALUES (
 
 export const connectToPG = async (): Promise<void> => {
   await client.connect();
-  const res = await client.query(INIT_QUERY);
-  return res;
+  await client.query(INIT_QUERY);
 };
 
 export const getValue = async (): Promise<boolean> => {
@@ -37,5 +36,4 @@ export const setValue = async (newValue: boolean): Promise<void> => {
     "UPDATE settings SET value=$1 WHERE name='altTemplate'",
     [newValue],
   );
-  return res.rows;
 };
