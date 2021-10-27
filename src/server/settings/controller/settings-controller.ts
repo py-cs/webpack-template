@@ -2,9 +2,7 @@ import { Response, Request } from 'express';
 import { ISettingsService } from '../services/settings-service.interface';
 import { ISettingsController } from './settings-controller.interface';
 
-// eslint-disable-next-line import/prefer-default-export
 export class SettingsController implements ISettingsController {
-  // eslint-disable-next-line no-useless-constructor
   constructor(private settingsService: ISettingsService) {}
 
   async getSettings(req: Request, res: Response): Promise<void> {

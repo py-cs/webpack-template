@@ -21,7 +21,7 @@ const Main = (): JSX.Element => {
 
   useEffect(() => {
     apiGetTasks().then((data) => setTasks(data));
-    apiGetAltTemplate().then((data) => setAltTemplate(data));
+    apiGetAltTemplate().then((data) => setAltTemplate(data.altTemplate));
   }, []);
 
   const createTask = useCallback(
@@ -48,7 +48,7 @@ const Main = (): JSX.Element => {
 
   const toggleTemplate = useCallback(
     () => {
-      apiUpdateAltTemplate(!altTemplate);
+      apiUpdateAltTemplate({ altTemplate: !altTemplate });
       setAltTemplate(!altTemplate);
     },
     [altTemplate],

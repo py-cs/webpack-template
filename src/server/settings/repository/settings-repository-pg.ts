@@ -13,11 +13,9 @@ INSERT INTO settings VALUES (
 ) ON CONFLICT DO NOTHING;
 `;
 
-// eslint-disable-next-line import/prefer-default-export
 export class SettingsRepositoryPG implements SettingsRepository {
   client: Client;
 
-  // eslint-disable-next-line no-useless-constructor
   constructor(private connectionString: string) {}
 
   async connect(): Promise<void> {

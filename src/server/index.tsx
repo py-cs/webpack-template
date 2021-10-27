@@ -1,17 +1,21 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import fs from 'fs';
 import { renderToString } from 'react-dom/server';
 import React from 'react';
 import path from 'path';
 import App from '../client/App';
-import { connectToDatabase } from './services/mongo.service';
-import { connectToPG } from './services/pg.service';
-import { router } from './routes/router';
 import { createSettingsRouter } from './settings/router/settings-router';
 import { SettingsController } from './settings/controller/settings-controller';
 import { SettingsService } from './settings/services/settings-service';
 import { SettingsRepositoryPG } from './settings/repository/settings-repository-pg';
+import { TasksRepositoryMongo } from './tasks/repository/tasks-repository-mongo';
+import { TasksService } from './tasks/services/tasks-service';
+import { TasksController } from './tasks/controller/tasks-controller';
+import { createTasksRouter } from './tasks/router/tasks-router';
+import { FileLoggerRepository } from './logs/logger-repository-file';
+import { LoggerService } from './logs/logger-service';
 
 const app = express();
 const PORT = 5000;
@@ -23,9 +27,23 @@ const settingsService = new SettingsService(settingsRepository);
 const settingsController = new SettingsController(settingsService);
 const settingsRouter = createSettingsRouter(settingsController);
 
-app.use(express.static('dist/client'));
+const logsRepository = new FileLoggerRepository('log.txt');
+const logsService = new LoggerService(logsRepository);
 
+const tasksRepository = new TasksRepositoryMongo(
+  process.env.DB_CONN_STRING,
+  process.env.DB_NAME,
+  process.env.TASKS_COLLECTION_NAME,
+);
+const tasksService = new TasksService(tasksRepository);
+const tasksController = new TasksController(tasksService, logsService);
+const tasksRouter = createTasksRouter(tasksController);
+
+app.use(express.static('dist/client'));
+app.use(cors());
+app.use(express.json());
 app.use('/api/settings', settingsRouter);
+app.use('/api/tasks', tasksRouter);
 
 app.use('*', (req: express.Request, res: express.Response) => {
   let indexHTML = fs.readFileSync(

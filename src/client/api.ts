@@ -10,6 +10,10 @@ export interface Task {
   description: string;
 }
 
+export interface Settings {
+  altTemplate: boolean;
+}
+
 export const apiGetTasks = (): Promise<Task[]> =>
   axios.get(TASKS_URL).then((resp) => resp.data);
 
@@ -22,12 +26,10 @@ export const apiUpdateTask = (task: Task): Promise<void> =>
 export const apiDeleteTask = (id: string): Promise<void> =>
   axios.delete(`${TASKS_URL}/${id}`).then((resp) => resp.data);
 
-export const apiGetAltTemplate = (): Promise<boolean> =>
+export const apiGetAltTemplate = (): Promise<Settings> =>
   axios.get(SETTINGS_URL).then((resp) => resp.data.value);
 
-export const apiUpdateAltTemplate = (value: boolean): Promise<void> =>
+export const apiUpdateAltTemplate = (settings: Settings): Promise<Settings> =>
   axios
-    .put(SETTINGS_URL, {
-      value,
-    })
+    .put(SETTINGS_URL, settings)
     .then((resp) => resp.data);
