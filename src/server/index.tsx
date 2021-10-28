@@ -15,7 +15,6 @@ import { TasksService } from './tasks/services/tasks-service';
 import { TasksController } from './tasks/controller/tasks-controller';
 import { createTasksRouter } from './tasks/router/tasks-router';
 import { FileLoggerRepository } from './logs/logger-repository-file';
-import { LoggerService } from './logs/logger-service';
 
 const app = express();
 const PORT = 5000;
@@ -28,15 +27,14 @@ const settingsController = new SettingsController(settingsService);
 const settingsRouter = createSettingsRouter(settingsController);
 
 const logsRepository = new FileLoggerRepository('log.txt');
-const logsService = new LoggerService(logsRepository);
 
 const tasksRepository = new TasksRepositoryMongo(
   process.env.DB_CONN_STRING,
   process.env.DB_NAME,
   process.env.TASKS_COLLECTION_NAME,
 );
-const tasksService = new TasksService(tasksRepository);
-const tasksController = new TasksController(tasksService, logsService);
+const tasksService = new TasksService(tasksRepository, logsRepository);
+const tasksController = new TasksController(tasksService);
 const tasksRouter = createTasksRouter(tasksController);
 
 app.use(express.static('dist/client'));

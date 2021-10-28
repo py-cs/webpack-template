@@ -1,5 +1,5 @@
 import { LogAction } from './logger.types';
 
-export interface ILoggerRepository {
+export interface LoggerRepository {
   writeLog: (action: LogAction) => Promise<void>;
 }

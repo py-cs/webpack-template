@@ -1,8 +1,8 @@
 import fs from 'fs';
-import { ILoggerRepository } from './logger-repository.interface';
+import { LoggerRepository } from './logger-repository.interface';
 import { LogAction } from './logger.types';
 
-export class FileLoggerRepository implements ILoggerRepository {
+export class FileLoggerRepository implements LoggerRepository {
   constructor(private logFileName: string) {}
 
   async writeLog(action: LogAction): Promise<void> {
