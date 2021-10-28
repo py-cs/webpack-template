@@ -6,7 +6,7 @@ export class FileLoggerRepository implements LoggerRepository {
   constructor(private logFileName: string) {}
 
   async writeLog(action: LogAction): Promise<void> {
-    const record = `${action.time}\t${action.status}\t${action.message}\n`;
+    const record = `${action.time}\t${action.message}\n`;
     fs.writeFile(this.logFileName, record, { flag: 'a+' }, (err) => {
       if (err) console.error('Writting to log file failed');
     });
