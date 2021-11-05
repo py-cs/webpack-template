@@ -1,4 +1,4 @@
-import { Client } from 'pg';
+import { Client, ClientConfig } from 'pg';
 import { Settings } from '../types/settings.types';
 import { SettingsRepository } from './settings-repository.interface';
 
@@ -16,17 +16,20 @@ INSERT INTO settings VALUES (
 export class SettingsRepositoryPG implements SettingsRepository {
   client?: Client;
 
-  constructor(private connectionString: string) {}
+  constructor(private config: ClientConfig) {
+    console.log(this.config);
+  }
 
   async getClient(): Promise<Client> {
     if (!this.client) {
       this.client = new Client({
-        connectionString: this.connectionString,
+        ...this.config,
         ssl: { rejectUnauthorized: false },
       });
       await this.client.connect();
       await this.client.query(INIT_QUERY);
     }
+    console.log(this.client);
     return this.client;
   }
 
