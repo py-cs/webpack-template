@@ -15,9 +15,9 @@ export class SettingsController implements ISettingsController {
   }
 
   async updateSettings(req: Request, res: Response): Promise<void> {
-    const { value } = req.body;
+    const settings = req.body;
     try {
-      await this.settingsService.updateSettings(value);
+      await this.settingsService.updateSettings(settings);
       res.status(200).send();
     } catch (error) {
       res.status(500).send(error.message);

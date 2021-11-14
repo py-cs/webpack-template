@@ -29,21 +29,21 @@ export class SettingsRepositoryPG implements SettingsRepository {
       await this.client.connect();
       await this.client.query(INIT_QUERY);
     }
-    console.log(this.client);
     return this.client;
   }
 
   async getSettings(): Promise<Settings> {
+    const field = 'altTemplate';
     const client = await this.getClient();
-    const res = await client.query(
-      "SELECT value FROM settings WHERE name='altTemplate'",
-    );
-    return res.rows[0];
+    const res = await client.query('SELECT value FROM settings WHERE name=$1', [
+      field,
+    ]);
+    return { [field]: res.rows[0].value };
   }
 
   async updateSettings(newSettings: Settings): Promise<void> {
     const client = await this.getClient();
-    const [name, value] = Object.entries(newSettings);
+    const [name, value] = Object.entries(newSettings)[0];
     await client.query('UPDATE settings SET value=$1 WHERE name=$2', [
       value,
       name,

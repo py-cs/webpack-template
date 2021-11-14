@@ -27,9 +27,7 @@ export const apiDeleteTask = (id: string): Promise<void> =>
   axios.delete(`${TASKS_URL}/${id}`).then((resp) => resp.data);
 
 export const apiGetAltTemplate = (): Promise<Settings> =>
-  axios.get(SETTINGS_URL).then((resp) => resp.data.value);
+  axios.get(SETTINGS_URL).then((resp) => resp.data);
 
 export const apiUpdateAltTemplate = (settings: Settings): Promise<Settings> =>
-  axios
-    .put(SETTINGS_URL, settings)
-    .then((resp) => resp.data);
+  axios.put(SETTINGS_URL, settings).then((resp) => resp.data);

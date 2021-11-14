@@ -21,13 +21,15 @@ const PORT = 5000;
 
 dotenv.config();
 
-const settingsRepository = new SettingsRepositoryPG({
+const pgSettings = {
   user: process.env.PG_USER,
   password: process.env.PG_PASSWORD,
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   port: Number(process.env.PG_PORT),
-});
+};
+
+const settingsRepository = new SettingsRepositoryPG(pgSettings);
 const settingsService = new SettingsService(settingsRepository);
 const settingsController = new SettingsController(settingsService);
 const settingsRouter = createSettingsRouter(settingsController);

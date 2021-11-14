@@ -3,9 +3,7 @@ version: '3.4'
 services:
   webpacktemplate:
     image: webpacktemplate
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    build: .
     environment:
       NODE_ENV: production
     ports:
@@ -13,9 +11,6 @@ services:
     volumes:
       - .:/usr/src/app
     depends_on:
-      - mongo
-      - postgres
-    links:
       - mongo
       - postgres
   mongo:
@@ -27,12 +22,12 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=db
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DATABASE}
     restart: always
     ports:
-      - 5432:5432
+      - ${PG_PORT}:5432
     volumes:
       - ./pgdata:/var/lib/postgresql/data/
 volumes:
