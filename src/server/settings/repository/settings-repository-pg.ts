@@ -24,7 +24,6 @@ export class SettingsRepositoryPG implements SettingsRepository {
     if (!this.client) {
       this.client = new Client({
         ...this.config,
-        ssl: { rejectUnauthorized: false },
       });
       await this.client.connect();
       await this.client.query(INIT_QUERY);
