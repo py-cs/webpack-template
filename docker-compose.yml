@@ -3,7 +3,7 @@ version: '3.4'
 services:
   webpacktemplate:
     image: webpacktemplate
-    build: .
+    build: . 
     environment:
       HISTORY_FILENAME: "log.txt"
       MONGO_HOST: mongo
