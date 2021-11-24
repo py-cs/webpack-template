@@ -22,9 +22,7 @@ export class SettingsRepositoryPG implements SettingsRepository {
 
   async getClient(): Promise<Client> {
     if (!this.client) {
-      this.client = new Client({
-        ...this.config,
-      });
+      this.client = new Client(this.config);
       await this.client.connect();
       await this.client.query(INIT_QUERY);
     }

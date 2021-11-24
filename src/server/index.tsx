@@ -34,11 +34,13 @@ const settingsService = new SettingsService(settingsRepository);
 const settingsController = new SettingsController(settingsService);
 const settingsRouter = createSettingsRouter(settingsController);
 
-const logsRepository = new FileLoggerRepository('log.txt');
+const logsRepository = new FileLoggerRepository(process.env.HISTORY_FILENAME);
+
+const mongoConnString = `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`;
 
 const tasksRepository = new TasksRepositoryMongo(
-  process.env.DB_CONN_STRING,
-  process.env.DB_NAME,
+  mongoConnString,
+  process.env.MONGO_DATABASE,
   process.env.TASKS_COLLECTION_NAME,
 );
 const tasksService = new TasksService(tasksRepository, logsRepository);
