@@ -1,9 +1,10 @@
 FROM node:14
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
+COPY package*.json ./
+RUN npm ci --production=false --silent && mv node_modules ../
 COPY . .
+RUN npm run build
 EXPOSE 5000
 RUN chown -R node /usr/src/app
 USER node

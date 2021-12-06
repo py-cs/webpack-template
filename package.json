@@ -1,4 +1,5 @@
 {
+  "name": "react-ssr-node",
   "scripts": {
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
