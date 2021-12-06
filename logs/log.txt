@@ -1,6 +1,0 @@
-Mon Dec 06 2021 15:05:13 GMT+0000 (Coordinated Universal Time)	Fetched 0 task(s)
-Mon Dec 06 2021 15:07:17 GMT+0000 (Coordinated Universal Time)	Fetched 0 task(s)
-Mon Dec 06 2021 15:07:21 GMT+0000 (Coordinated Universal Time)	Created new task
-Mon Dec 06 2021 15:07:23 GMT+0000 (Coordinated Universal Time)	Deleted task
-Mon Dec 06 2021 15:27:28 GMT+0000 (Coordinated Universal Time)	Fetched 0 task(s)
-Mon Dec 06 2021 15:27:31 GMT+0000 (Coordinated Universal Time)	Fetched 0 task(s)
