@@ -68,5 +68,5 @@ app.use('*', (req: express.Request, res: express.Response) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server started at http://localhost:${PORT}`);
+  console.log(`Server started at http://${process.env.REACT_APP_HOST}:${PORT}`);
 });
