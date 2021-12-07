@@ -15,6 +15,7 @@ services:
       PG_HOST: postgres
       PG_DATABASE: postgres
       PG_PORT: 5432
+      REACT_APP_HOST: ${REACT_APP_HOST}
     ports:
       - "80:5000"
       - "5000:5000"

@@ -1,7 +1,8 @@
 /* eslint-disable implicit-arrow-linebreak */
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/api';
+const HOST = process.env.REACT_APP_HOST;
+const BASE_URL = `http://${HOST}:5000/api`;
 const TASKS_URL = `${BASE_URL}/tasks`;
 const SETTINGS_URL = `${BASE_URL}/settings`;
 
