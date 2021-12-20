@@ -16,9 +16,7 @@ INSERT INTO settings VALUES (
 export class SettingsRepositoryPG implements SettingsRepository {
   client?: Client;
 
-  constructor(private config: ClientConfig) {
-    console.log(this.config);
-  }
+  constructor(private config: ClientConfig) {}
 
   async getClient(): Promise<Client> {
     if (!this.client) {

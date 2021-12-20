@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const HOST = process.env.REACT_APP_HOST;
-const BASE_URL = `http://${HOST}:5000/api`;
+const BASE_URL = `http://${HOST}/api`;
 const TASKS_URL = `${BASE_URL}/tasks`;
 const SETTINGS_URL = `${BASE_URL}/settings`;
 
